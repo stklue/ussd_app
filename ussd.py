@@ -24,6 +24,9 @@ def contact():
     return 'Contact Page Route'
 
 
+if __name__ == '__main__':
+    app.run() 
+
 @app.route('/api')
 def api():
     with open('data.json', mode='r') as my_file:
