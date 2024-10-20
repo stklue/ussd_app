@@ -39,6 +39,13 @@ app.post("/ussd", (req, res) => {
     // This is a terminal request. Note how we start the response with END
     // response = `END Your phone number is ${phoneNumber}`;
     response = `CON Enter recipient id (their url)`;
+    accountNumber = text;
+    if (text != "") {
+      response = `CON Enter the amount you want to send`;
+      if (text != "") {
+        response = `END Send amount ${text} to ${accountNumber}`;
+      }
+    }
   } else if (text === "1*1") {
     // This is a second level response where the user selected 1 in the first instance
     const accountNumber = "ACC100101";
@@ -49,8 +56,7 @@ app.post("/ussd", (req, res) => {
     const balance = "KES 10,000";
     // This is a terminal request. Note how we start the response with END
     response = `END Your balance is ${balance}`;
-  } 
-
+  }
 
   // Send the response back as plain text
   res.set("Content-Type", "text/plain");
